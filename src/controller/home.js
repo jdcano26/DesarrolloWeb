@@ -1,12 +1,19 @@
 //Package Importation
 //System
 import { Router } from 'express'
-import CookieParser from 'cookie-parser'
+//Local
+import { ProductModel } from '../../private/model/Product.js'
 
+
+//Server
 export const homeRoute = Router()
+//Local
+const productModel = new ProductModel()
 
-homeRoute.get("/", (req, res) => {
-  res.render("home");
-});
 
-export default homeRoute;
+//Routes
+homeRoute.get('/', async (req, res) => {
+    productModel.sel(function(all){
+      res.render(process.cwd() + '/src/views/home.ejs', { productData: all })
+    })
+})

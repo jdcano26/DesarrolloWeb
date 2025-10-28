@@ -4,10 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <script src="/js/home.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/script.js"></script>
 </head>
 <body>
-    Esta es la página del inicio
+    
+    <header class="main-header">
+        <a href="index.php" class="logo">
+            <img src="/img/app/logo.png" alt="Logo de MobileShop" class="logo-img">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="/product">Administrar</a></li> </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <h2>Tecnología de Vanguardia a tu Alcance</h2>
+            <p>Descubre los últimos modelos con precios increíbles.</p>
+            <button class="cta-button">Ver Novedades</button>
+        </section>
+
+        <section id="productos" class="product-listing">
+            <h3>Nuestros Productos Destacados</h3>
+            <% if (productData && productData.length > 0) { %>
+            <% productData.forEach(item => { %>
+
+                <article class="product-card" data-id="<%= item._id %>">
+                    <img src="<%= item.image %>" alt="Imagen de <%= item.name %>" class="product-img">
+                    <h4><%= item.name %></h4>
+                    <p class="specs"><%= item.description %></p>
+                    <p class="price">$ <%= Number(item.price).toLocaleString('es-CO') %></p>
+                    <button class="btn-cart" data-nombre="<%= item.name %>">Añadir al Carrito</button>
+                </article>
+            <% }) %>
+            <% } else { %>
+                <p class="info-message">No hay productos registrados en la tienda.</p>
+            <% } %>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2024 MobileShop. Todos los derechos reservados.</p>
+    </footer>
+
 </body>
 </html>

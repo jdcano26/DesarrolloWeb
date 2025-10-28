@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <script src="/js/home.js"></script>
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/product.css">
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="/js/jquery/lazyload/jquery.lazyload.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/product.js"></script>
 </head>
 <body>
-    <% if (productData && productData.length > 0) { %>
-    <% productData.forEach(item => { %>
-      <div>
-        <p>Nombre: <%= item.name %></p>
-        <p>Precio: <%= item.price %></p>
-        <p>Descripción: <%= item.description %></p>
-        <p>Estado: <%= item.state %></p>
-      </div>
-    <% }) %>
-  <% } else { %>
-    <p>No hay productos disponibles.</p>
-  <% } %>
+    <div class="form-section">
+        <h3>Ingresar Nuevo Celular 📱</h3>
+      
+        <form id="addProductForm" enctype="multipart/form-data">
+            
+            <label for="addProductName">Nombre del Celular:</label>
+            <input name="addProductName" type="text" id="nombre" required>
+            
+            <label for="addProductPrice">Precio ($):</label>
+            <input name="addProductPrice" type="number" id="precio" step="0.01" min="1" required>
+            
+            <label for="addProductDescription">Especificaciones:</label>
+            <textarea name="addProductDescription" id="especificaciones" required></textarea>
+            
+            <label for="addProductImage">Imagen del Celular:</label>
+            <input name="addProductImage" type="file" accept="image/*">
+            
+            <div class="butt">
+              <button type="submit" id="addProductFormSubmit" value="guardar">Guardar Producto</button>
+              <div>
+                <a href="/">Volver a la tienda</a>
+              </div>
+            </div>
+        </form>
+        <p class="mensaje exito">¡Producto guardado con éxito! 🎉</p>
+        <p class="mensaje error"></p>
+    </div>
 </body>
 </html>

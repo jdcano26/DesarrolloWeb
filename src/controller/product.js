@@ -1,9 +1,13 @@
 //Package Importation
 //System
 import { Router } from 'express'
+import Multer from 'multer'
 //Local
 import { ProductModel } from '../../private/model/Product.js'
 
+
+//Initialization
+const upload = Multer();
 
 //Server
 export const productRoute = Router()
@@ -25,28 +29,15 @@ productRoute.get('/product', async (req, res) => {
       res.render(process.cwd() + '/src/views/product.ejs', { productData: all })
     })
 })
-/*
-productModel.post('/addProduct', upload.none(), (req, res) => {
+productRoute.post('/formAddProduct', upload.single('addProductImage'), (req, res) => {
     productModel.add(
-        req.body.signUpFormEmail, 
-        req.body.signUpFormUserName, 
-        req.body.signUpFormPassword,
-        req.body.signUpFormPassword2,
-        req.body.signUpFormAgree,
-        async function( result, userName ) {
-            productData = {
-                userName: userName,
-                userTheme: 0,
-                userProfile: "",
-                userBackground: "",
-                userPermission: null
-            }
-
-            if( userName != null) {
-                res.cookie("productData", productData)
-            }
-
+        req.body.addProductName,
+        req.body.addProductDescription,
+        req.body.addProductPrice,
+        req.file ? req.file.buffer : null,
+        async function( result ) {
+            
             res.end( result )
         }
     )
-})*/
+})

@@ -19,6 +19,7 @@ app.set("views", path.join(__dirname, "src", "views"))
 // Archivos
 app.use('/css', express.static(process.cwd() + '/public/css'))
 app.use('/js', express.static(process.cwd() + '/public/js'))
+app.use('/img', express.static(process.cwd() + '/public/img'))
 
 // Middleware
 app.use(express.json());
